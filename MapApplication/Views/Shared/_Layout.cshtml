@@ -7,12 +7,17 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="container-fluid body-content">
+<body style="padding:0; margin:0">
+    <div class="container-fluid body-content" ng-app="MapApp" style="padding:0; margin:0">
         @RenderBody()
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8i1b6khDEAXPPxyCkoIZk0CHKeNDRAcE"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-resource.min.js"></script>
+    <script src="~/Scripts/app/Modules/module.js"></script>
+    <script src="~/Scripts/app/Controller/MapController.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
