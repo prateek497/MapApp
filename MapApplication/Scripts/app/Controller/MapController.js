@@ -11,6 +11,8 @@
         }, function (error) { alert('Unable to get location: ' + error.message); }, options);
     }
 
+    $scope.userName = "testuser";
+
     $scope.loadMap();
 
     $scope.createMap = function () {
@@ -34,12 +36,13 @@
         });
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
-                infoWindow.setContent(compiled[0]);
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
+                infoWindow.setContent(compiled[0]);
                 infoWindow.open($scope.map, marker);
             });
-
+            //infoWindow.setContent(compiled[0]);
+            //infoWindow.open($scope.map, marker);
         })(marker, data);
         $scope.getNotes();
     }
@@ -67,7 +70,7 @@
     $scope.addMarker = function () {
         $scope.notes = "";
         var c = $scope.map.getCenter();
-        var coord = randomGeo(c, 100000);
+        var coord = randomGeo(c, 50000);
         var infoWindow = new google.maps.InfoWindow();
         var myLatlng = new google.maps.LatLng(coord.latitude, coord.longitude);
         var html = "<div><input type='text' ng-model='notes' class='form-control' placeholder='Enter notes here'> <br/> <input type='button' value='save' class='btn btn-primary btn-xs' ng-click='saveNotes(myLatlng)' id='saveButton'><div/>";
@@ -80,6 +83,7 @@
         });
         (function (marker) {
             google.maps.event.addListener(marker, "click", function (e) {
+                $scope.notes = "";
                 infoWindow.setContent(compiled[0]);
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
@@ -130,11 +134,11 @@
     }
 
     $scope.saveNotes = function () {
-        if ($scope.notes) {
+        if ($scope.notes && $scope.userName) {
             var dto = {
                 Lat: $scope.position.lat(),
                 lng: $scope.position.lng(),
-                User: "testUser",
+                User: $scope.userName,
                 Note: $scope.notes
             }
             $http({
@@ -151,7 +155,7 @@
             });
         }
         else {
-            alert("Notes can't be empty");
+            alert("Notes or userName can't be empty");
         }
     };
 });
