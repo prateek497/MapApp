@@ -5,6 +5,7 @@
             enableHighAccuracy: true
         };
 
+        //get the current location
         navigator.geolocation.getCurrentPosition(function (pos) {
             $scope.position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
             $scope.createMap();
@@ -16,6 +17,7 @@
     $scope.loadMap();
 
     $scope.createMap = function () {
+        //Setting up the map
         var mapOptions = {
             center: new google.maps.LatLng($scope.position.lat(), $scope.position.lng()),
             zoom: 9,
@@ -35,6 +37,7 @@
             title: "Current Location"
         });
         (function (marker, data) {
+            //attaching the click event
             google.maps.event.addListener(marker, "click", function (e) {
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
@@ -48,6 +51,7 @@
     }
 
     $scope.LoadNotesList = function (list) {
+        //loop and create the new marker
         for (i = 0; i < list.length; i++) {
             var infoWindow = new google.maps.InfoWindow();
             var myLatlng = new google.maps.LatLng(list[i].Lat, list[i].Long);
@@ -58,6 +62,7 @@
                 title: list[i].Id.toString()
             });
             (function (marker) {
+                //attach the event
                 google.maps.event.addListener(marker, "click", function (e) {
                     var single = list.filter(x=> x.Id == marker.title);
                     infoWindow.setContent(single[0].Notes);
@@ -68,6 +73,7 @@
     }
 
     $scope.addMarker = function () {
+        //clear the notes
         $scope.notes = "";
         var c = $scope.map.getCenter();
         var coord = randomGeo(c, 50000);
@@ -75,6 +81,7 @@
         var myLatlng = new google.maps.LatLng(coord.latitude, coord.longitude);
         var html = "<div><input type='text' ng-model='notes' class='form-control' placeholder='Enter notes here'> <br/> <input type='button' value='save' class='btn btn-primary btn-xs' ng-click='saveNotes(myLatlng)' id='saveButton'><div/>";
         var compiled = $compile(html)($scope);
+        //create the marker
         var marker = new google.maps.Marker({
             position: myLatlng,
             animation: google.maps.Animation.DROP,
@@ -82,17 +89,20 @@
             title: "New Marker"
         });
         (function (marker) {
+            //attach the event
             google.maps.event.addListener(marker, "click", function (e) {
-                $scope.notes = "";
                 infoWindow.setContent(compiled[0]);
+                $scope.notes = "";
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
                 infoWindow.open($scope.map, marker);
+                $scope.activeMarker = marker;
             });
 
         })(marker);
     }
 
+    //function to generate random lat long near to the center of map 
     function randomGeo(center, radius) {
         var y0 = center.lat();
         var x0 = center.lng();
@@ -119,6 +129,7 @@
         };
     }
 
+    //http request to get the data from backend
     $scope.getNotes = function () {
         $http({
             method: 'GET',
@@ -133,6 +144,7 @@
         });
     }
 
+    //http request to post the data to backend
     $scope.saveNotes = function () {
         if ($scope.notes && $scope.userName) {
             var dto = {
@@ -150,6 +162,7 @@
             }).then(function successCallback(response) {
                 $scope.getNotes();
                 $scope.infoWindow.close();
+                $scope.activeMarker.setMap(null);
             }, function errorCallback(response) {
                 alert("Unable to save. Error : " + response.data.ExceptionMessage);
             });

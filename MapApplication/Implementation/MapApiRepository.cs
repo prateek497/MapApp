@@ -15,11 +15,19 @@ namespace MapApplication.Implementation
             _entities = new mapEntities();
         }
 
+        /// <summary>
+        /// Get the note list
+        /// </summary>
+        /// <returns>List<note></returns>
         public List<Note> GetNotesForCurrentUser()
         {
             return _entities.Notes.ToList();
         }
 
+        /// <summary>
+        /// Sav the notes to the database
+        /// </summary>
+        /// <param name="model">model with notes information</param>
         public void SaveNotes(Notes model)
         {
             var notes = new Note

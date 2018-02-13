@@ -13,12 +13,21 @@ namespace MapApplication.Controllers.api
             _repository = new MapApiRepository();
         }
 
+        /// <summary>
+        /// Fetch the notes from database
+        /// </summary>
+        /// <returns>List<Notes></returns>
         [HttpGet]
         public IHttpActionResult GetNotes()
         {
             return Ok(_repository.GetNotesForCurrentUser());
         }
 
+        /// <summary>
+        /// Save or update notes to the database
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult SaveNotes(Notes dto)
         {
