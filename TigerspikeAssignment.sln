@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapApplication.Tests", "TigerspikeAssignment.Tests\MapApplication.Tests.csproj", "{9AEE454B-4204-4DCC-9F02-C200FC5F7E24}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapApplication", "MapApplication\MapApplication.csproj", "{D181E438-AE49-4416-AC44-935099536F43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapApplication.Tests", "TigerspikeAssignment.Tests\MapApplication.Tests.csproj", "{9AEE454B-4204-4DCC-9F02-C200FC5F7E24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
