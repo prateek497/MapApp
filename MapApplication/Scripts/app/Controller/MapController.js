@@ -12,9 +12,10 @@
         }, function (error) { alert('Unable to get location: ' + error.message); }, options);
     }
 
-    $scope.userName = "testuser";
-
-    $scope.loadMap();
+    angular.element(document).ready(function () {
+        $scope.loadMap();
+        $scope.userName = "testuser";
+    });
 
     $scope.createMap = function () {
         //Setting up the map

@@ -185,9 +185,7 @@
     <Compile Include="Implementation\MapApiRepository.cs" />
     <Compile Include="Interface\IMapApi.cs" />
     <Compile Include="Controllers\api\MapApiController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\Notes.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -281,7 +279,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Map\Index.cshtml" />
