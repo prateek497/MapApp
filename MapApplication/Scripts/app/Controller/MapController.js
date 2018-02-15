@@ -40,9 +40,11 @@
         (function (marker, data) {
             //attaching the click event
             google.maps.event.addListener(marker, "click", function (e) {
+                if ($scope.infoWindow) $scope.infoWindow.close();
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
-                infoWindow.setContent(compiled[0]);
+                infoWindow.setContent(compiled[0])
+                $scope.notes = null;
                 infoWindow.open($scope.map, marker);
             });
             //infoWindow.setContent(compiled[0]);
@@ -92,12 +94,14 @@
         (function (marker) {
             //attach the event
             google.maps.event.addListener(marker, "click", function (e) {
+                if ($scope.infoWindow) $scope.infoWindow.close();
                 infoWindow.setContent(compiled[0]);
-                $scope.notes = "";
+                $scope.notes = null;
                 $scope.position = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
                 $scope.infoWindow = infoWindow;
                 infoWindow.open($scope.map, marker);
                 $scope.activeMarker = marker;
+                
             });
 
         })(marker);
